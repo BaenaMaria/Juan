@@ -102,10 +102,16 @@
         var name = document.getElementById('name').value;
         var email = document.getElementById('email').value;
         var phone = document.getElementById('phone').value;
+        var c1=document.getElementById('check').check;
 
         var expresion = /\w+@\w+\.+[a-z]/;
 
 
+        if (c1 == false) {
+            console.log('Check');
+            alert('Debe aceptar los términos y condiciones');
+            return false;
+        }
         if (name.length == 0) {
             console.log('El nombre está vacío');
             alert('El campo nombre es obligatorio');
