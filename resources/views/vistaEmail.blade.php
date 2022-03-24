@@ -1,11 +1,11 @@
-<form id="form1" method="GET" name="form1" action="{{route('sendEmail')}}">
+<form id="form1" method="GET" name="form1" action="{{ route('sendEmail') }}">
     @csrf
     <div class="login-wrap">
         <div class="login-html">
             <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1"
                 class="tab">Enviar Email</label>
-            <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Sign
-                Up</label>
+            <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2"
+                class="tab"></label>
             <div class="login-form">
                 <div class="sign-in-htm">
                     <div class="group">
@@ -21,42 +21,20 @@
                         <input id="email" type="email" class="input" name="email">
                     </div>
                     <div class="group">
-                        <input id="check2" type="checkbox" class="check" checked required>
-                        <label for="check2"><span class="icon"></span> Acepto los términos y condiciones, política de privacidad y procesamiento de datos.*</label>
+                        <input id="check2" type="checkbox" class="check" name="checkTerminos" checked required>
+                        <label for="check2"><span class="icon"></span> Acepto los términos y condiciones,
+                            política de privacidad y procesamiento de datos.*</label>
                     </div>
                     <div class="group">
-                        <input id="check" type="checkbox" class="check" checked>
-                        <label for="check"><span class="icon"></span> Deseo recibir información acerca de los servicios de Ayuda T Soluciones Profesionales.</label>
+                        <input id="check" type="checkbox" class="check" name="checkPubli" checked>
+                        <label for="check"><span class="icon"></span> Deseo recibir información acerca de los
+                            servicios de Ayuda T Soluciones Profesionales.</label>
                     </div>
                     <div class="group">
                         <button type="submit" class="button" name="btnEnviar">Enviar</button>
                     </div>
                     <div class="hr"></div>
                 </div>
-                <div class="sign-up-htm">
-                    <div class="group">
-                        <label for="user" class="label">Username</label>
-                        <input id="user" type="text" class="input">
-                    </div>
-                    <div class="group">
-                        <label for="pass" class="label">Password</label>
-                        <input id="pass" type="password" class="input" data-type="password">
-                    </div>
-                    <div class="group">
-                        <label for="pass" class="label">Repeat Password</label>
-                        <input id="pass" type="password" class="input" data-type="password">
-                    </div>
-                    <div class="group">
-                        <label for="pass" class="label">Email Address</label>
-                        <input id="pass" type="text" class="input">
-                    </div>
-                    <div class="group">
-                        <input type="submit" class="button" value="Sign Up">
-                    </div>
-                    <div class="hr"></div>
-                    <div class="foot-lnk">
-                        <label for="tab-1">Already Member?</a>
-                    </div>
                 </div>
             </div>
         </div>
@@ -66,24 +44,25 @@
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 
 <script type="text/javascript">
-    $(function () {
-        $("[id*=btnSend]").click(function () {
+    $(function() {
+        $("[id*=btnSend]").click(function() {
             var toEmail = $.trim($("[id*=txtTo]").val());
             var subject = $.trim($("[id*=txtSubject]").val());
             var body = $.trim($("[id*=txtBody]").val());
             $.ajax({
                 type: "POST",
                 url: "Service.asmx/SendEmail",
-                data: "{ toEmail: '" + toEmail + "', subject: '" + subject + "', body: '" + body + "' }",
+                data: "{ toEmail: '" + toEmail + "', subject: '" + subject + "', body: '" +
+                    body + "' }",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
-                success: function (r) {
+                success: function(r) {
                     alert(r.d);
                 },
-                error: function (r) {
+                error: function(r) {
                     alert(r.responseText);
                 },
-                failure: function (r) {
+                failure: function(r) {
                     alert(r.responseText);
                 }
             });
@@ -91,62 +70,53 @@
         });
     });
 </script>
+
 <script>
-    document.addEventListener("DOMContentLoaded", function (event) {
+    document.addEventListener("DOMContentLoaded", function(event) {
         document.getElementById('form1').addEventListener('submit',
             manejadorValidacion)
     });
 
     function manejadorValidacion(e) {
-
         var name = document.getElementById('name').value;
         var email = document.getElementById('email').value;
         var phone = document.getElementById('phone').value;
-        var c1=document.getElementById('check').check;
-
         var expresion = /\w+@\w+\.+[a-z]/;
 
 
-        if (c1 == false) {
-            console.log('Check');
-            alert('Debe aceptar los términos y condiciones');
-            return false;
-        }
         if (name.length == 0) {
             console.log('El nombre está vacío');
-            alert('El campo nombre es obligatorio');
             return false;
         }
+        if (!/^([a-zA-ZñÑáéíóúÁÉÍÓÚ])+$/i.test(name)) {
+            console.log('Nombre mal escrito');
+            return false;
+        }
+
+
         if (email.length == 0) {
             console.log('El email no es válido');
-            alert('El campo email es obligatorio');
             return false;
         }
 
         if (!expresion.test(email)) {
             console.log('Formato de email no valido');
-            alert('Email con formato no válido');
             return false;
         }
         if (phone.length != 9) {
             console.log('El phone no es válido');
-            alert('El campo teléfono es un campo obligatorio');
             return false;
         }
         if (isNaN(phone)) {
             console.log('El phone no es válido');
-            alert('Teléfono con formato no válido, debe tener 9 dígitos');
             return false;
 
         }
-        alert('Correo enviado, gracias por su interés');
+
+    }
 
     this.submit();
-
-
 </script>
-
-
 
 <style>
     body {

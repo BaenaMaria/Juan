@@ -14,12 +14,16 @@ class TestMail extends Mailable
     public $name;
     public $phone;
     public $email;
+    public $checkTerminos;
+    public $checkPubli;
 
-    public function __construct($name, $phone, $email)
+    public function __construct($name, $phone, $email, $checkTerminos, $checkPubli)
     {
         $this->name=$name;
         $this->phone=$phone;
         $this->email=$email;
+        $this->checkTerminos=$checkTerminos;
+        $this->checkPubli=$checkPubli;
     }
 
     /**

@@ -9,8 +9,10 @@
 </head>
 
 <body>
-    <h1>Nombre: {{$name}}</h1>
-    <h1>Teléfono: {{$phone}}</h1>
-    <h1>Email: {{$email}}</h1>
+    <h2>Nombre: </h2><p>{{$name}}</p>
+    <h2>Teléfono: </h2><p>{{$phone}}</p>
+    <h2>Email: </h2><p>{{$email}}</p>
+    <h2>Terminos: </h2><p>{{$checkTerminos}}</p>
+    <h2>Publi: </h2><p>{{$checkPubli}}</p>
 </body>
 </html>
